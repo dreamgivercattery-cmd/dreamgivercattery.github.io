@@ -1,0 +1,144 @@
+/* DreamGiver palette and typography */
+:root {
+  --dreamgiver-purple: #6E2DA8;
+  --lavender-mist: #D4B2FF;
+  --creamy-sand: #F9EFE3;
+  --golden-ember: #E3B64D;
+  --ink: #2C1A36;
+  --font-header: "Playfair Display", serif;
+  --font-body: "Lato", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--lavender-mist) 0%, var(--creamy-sand) 65%);
+  font-family: var(--font-body);
+  color: var(--ink);
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.page {
+  width: min(1100px, 100%);
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 36px;
+  padding: 2.5rem;
+  box-shadow: 0 25px 45px rgba(44, 26, 54, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.logo-banner {
+  text-align: center;
+  font-family: var(--font-header);
+  font-size: 1.5rem;
+  letter-spacing: 0.3rem;
+  color: var(--dreamgiver-purple);
+}
+
+.hero-section {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 32px;
+  padding: 2rem;
+  box-shadow: inset 0 0 0 1px rgba(110, 45, 168, 0.15);
+}
+
+.hero-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.hero-copy h1 {
+  font-family: var(--font-header);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  margin: 0.5rem 0;
+  color: var(--ink);
+}
+
+.hero-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--dreamgiver-purple);
+  margin: 0;
+}
+
+.hero-subtext {
+  margin: 1rem 0 1.5rem;
+  line-height: 1.7;
+  color: rgba(44, 26, 54, 0.8);
+}
+
+.cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cta-button {
+  background: var(--dreamgiver-purple);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.85rem 2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+}
+
+.cta-button:hover,
+.cta-button:focus-visible {
+  background: var(--golden-ember);
+  outline: none;
+  color: #1a0f2b;
+}
+
+.hero-image-wrap {
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 35px rgba(44, 26, 54, 0.25);
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.launch-note {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.launch-note strong {
+  color: var(--dreamgiver-purple);
+}
+
+@media (min-width: 900px) {
+  .hero-grid {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .hero-copy {
+    flex: 1;
+  }
+
+  .hero-image-wrap {
+    flex: 1;
+    max-width: 520px;
+  }
+}
