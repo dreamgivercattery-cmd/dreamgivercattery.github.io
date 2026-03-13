@@ -30,7 +30,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 56px; height: 68px;
-      background: rgba(255,255,255,0.97);
+      background: #f3eaff;
       backdrop-filter: blur(8px);
       transition: box-shadow 0.3s;
     }
@@ -75,16 +75,17 @@
     }
  
     /* ─── HERO ─── */
-    #home {
-      min-height: 100vh;
-      padding-top: 68px;
-      background: #faf8f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
+   #home {
+  min-height: 100vh;
+  padding-top: 68px;
+  background: var(--purple);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
  
     /* Floating photo tiles */
     .hero-photo {
@@ -128,11 +129,11 @@
     }
     .hp-left-bot {
       width: 220px; height: 205px;
-      bottom: 5%; left: 2%;
+      bottom: 5%; left: 10%;
     }
     .hp-right-bot {
       width: 180px; height: 200px;
-      bottom: 5%; right: 2%;
+      bottom: 5%; right: 10%;
     }
  
     /* Centre text */
@@ -143,34 +144,34 @@
       max-width: 680px;
     }
     .hero-eyebrow {
-      font-family: 'Lato', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--purple);
-      margin-bottom: 18px;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-    }
-    .hero-eyebrow::before, .hero-eyebrow::after {
-      content: ''; width: 30px; height: 1px;
-      background: var(--purple); opacity: 0.4;
-    }
-    .hero-center h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 5.5vw, 4.8rem);
-      font-weight: 900;
-      line-height: 1.1;
-      color: var(--dark);
-      margin-bottom: 20px;
-    }
-    .hero-center h1 em { font-style: italic; color: var(--purple); }
-    .hero-center p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: #6a5a72;
-      margin-bottom: 36px;
-    }
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--lavender);
+  margin-bottom: 18px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.hero-eyebrow::before, .hero-eyebrow::after {
+  content: ''; width: 30px; height: 1px;
+  background: var(--lavender); opacity: 0.6;
+}
+.hero-center h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.hero-center h1 em { font-style: italic; color: var(--gold); }
+.hero-center p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 36px;
+}
     .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
     .btn-gold {
       background: var(--gold); color: var(--dark);
@@ -299,17 +300,39 @@
  
     /* ─── MOBILE ─── */
     @media (max-width: 900px) {
-      nav { padding: 0 24px; }
-      .nav-links { display: none; }
-      .hero-photo { display: none; }
-      .hero-center { padding: 40px 24px; }
-      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
-      .section-inner { padding: 72px 24px; }
-      .social-row { flex-wrap: wrap; }
-    }
-    @media (max-width: 560px) {
-      .hero-buttons { flex-direction: column; align-items: center; }
-    }
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero-photo { display: none; }
+  .hero-center { padding: 32px 24px 12px; }
+  .hero-center h1 { font-size: 2.4rem; }
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  .section-inner { padding: 72px 24px; }
+  .social-row { flex-wrap: wrap; }
+  .mobile-photo-row {
+    display: flex;
+    gap: 12px;
+    padding: 20px 16px 0;
+    justify-content: center;
+  }
+  .mobile-photo-row .m-photo {
+    flex: 1;
+    max-width: 48%;
+    height: 180px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  .mobile-photo-row .m-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+}
+@media (min-width: 901px) {
+  .mobile-photo-row { display: none; }
+}
+@media (max-width: 560px) {
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .mobile-photo-row .m-photo { height: 140px; }
+}
   </style>
 </head>
 <body>
@@ -350,8 +373,17 @@
 <div class="hero-photo hp-right-bot">
     <img src="cat_5.jpg" alt="Somali cat" />
 </div>
- 
+
+<!-- Mobile top row -->
+  <div class="mobile-photo-row">
+    <div class="m-photo"><img src="cat_1.jpeg" alt="Somali kitten" /></div>
+    <div class="m-photo"><img src="cat_3.jpeg" alt="Somali cats" /></div>
+  </div>
+
   <!-- Centre content -->
+  <div class="hero-center">
+  
+<!-- Centre content -->
   <div class="hero-center">
     <div class="hero-eyebrow">DreamGiver Somali Cat Cattery</div>
     <h1>Discover the <em>Charm</em> of Somali Cats</h1>
@@ -360,6 +392,15 @@
       <a href="#kittens" class="btn-gold">Meet the Kittens</a>
     </div>
   </div>
+
+  </div>
+
+  <!-- Mobile bottom row -->
+  <div class="mobile-photo-row" style="padding: 0 16px 32px;">
+    <div class="m-photo"><img src="cat_2.jpeg" alt="Somali cat" /></div>
+    <div class="m-photo"><img src="cat_4.jpeg" alt="Somali cat" /></div>
+  </div>
+
  
 </section>
  
@@ -409,7 +450,7 @@
             <div class="social-row">
  
               <!-- Instagram -->
-              <a href="https://www.instagram.com/dreamgivercattery/ target="_blank" class="social-btn" aria-label="Instagram">
+              <a href="https://www.instagram.com/dreamgivercattery/" target="_blank" class="social-btn" aria-label="Instagram">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                 </svg>
