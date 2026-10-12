@@ -208,7 +208,7 @@
 
     /* ─── CAROUSEL ─── */
     .carousel-outer { position: relative; overflow: hidden; }
-    .carousel-track-wrap { overflow: hidden; padding: 0 56px; }
+    .carousel-track-wrap { overflow: hidden; padding: 0 56px; clip-path: inset(0 56px); }
     .carousel-track {
       display: flex; gap: 20px;
       transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
@@ -472,7 +472,7 @@
       .litter-header { grid-template-columns: 1fr; }
       .queen-photo { height: 260px; }
       .litter-info { padding: 28px 24px; }
-      .carousel-track-wrap { padding: 0 24px; }
+      .carousel-track-wrap { padding: 0 24px; clip-path: inset(0 24px); }
       .kitten-card { flex: 0 0 calc(50% - 10px); }
 
       .breeding-inner { padding: 0 24px; }
@@ -486,6 +486,127 @@
     @media (max-width: 560px) {
       .kitten-card { flex: 0 0 calc(100% - 0px); }
       .breeding-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── KITTEN GROWTH GALLERY ─── */
+    .kitten-card[data-kitten] { cursor: pointer; }
+    .kitten-card[data-kitten]:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .kitten-week {
+      position: absolute; top: 14px; right: 14px; z-index: 2;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 5px 11px; border-radius: 20px;
+      background: rgba(26,10,46,0.72); color: var(--white);
+    }
+    .kitten-overlay-hint {
+      display: block; margin-top: 8px;
+      font-size: 0.78rem; font-weight: 700; color: var(--white); opacity: 0.85;
+    }
+    /* On touch screens there is no hover, so keep name + hint visible */
+    @media (hover: none) {
+      .kitten-card[data-kitten] .kitten-overlay { opacity: 1; }
+    }
+
+    .kg-modal {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      align-items: center; justify-content: center; padding: 24px;
+    }
+    .kg-modal.open { display: flex; }
+    .kg-backdrop { position: absolute; inset: 0; background: rgba(26,10,46,0.78); }
+    .kg-panel {
+      position: relative; width: 100%; max-width: 1040px; max-height: calc(100vh - 48px);
+      background: var(--white); border-radius: 16px; overflow: hidden;
+      display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+    }
+    .kg-close {
+      position: absolute; top: 12px; right: 12px; z-index: 3;
+      width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer;
+      background: var(--white); color: var(--dark); font-size: 1.5rem; line-height: 1;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+    .kg-close:hover { background: var(--lavender); }
+
+    .kg-viewer {
+      position: relative; background: var(--dark);
+      display: flex; align-items: center; justify-content: center; min-height: 0;
+    }
+    .kg-viewer img {
+      width: 100%; height: 100%; max-height: calc(100vh - 48px);
+      object-fit: contain; display: block;
+    }
+    .kg-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 42px; height: 42px; border-radius: 50%; border: none; cursor: pointer;
+      background: rgba(255,255,255,0.9); color: var(--purple);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .kg-nav svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .kg-nav:disabled { opacity: 0.3; pointer-events: none; }
+    .kg-prev { left: 12px; }
+    .kg-next { right: 12px; }
+    .kg-caption {
+      position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+      background: rgba(26,10,46,0.75); color: var(--white);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 20px; white-space: nowrap;
+    }
+
+    .kg-info { padding: 40px 36px 32px; overflow-y: auto; }
+    .kg-status {
+      display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 5px 13px; border-radius: 20px; margin-bottom: 14px;
+    }
+    .kg-info h2 {
+      font-family: 'Playfair Display', serif; font-size: 1.9rem; line-height: 1.15;
+      color: var(--dark); margin-bottom: 4px;
+    }
+    .kg-reg {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold-dark); margin-bottom: 22px;
+    }
+    .kg-facts {
+      display: grid; grid-template-columns: auto 1fr; gap: 8px 18px;
+      font-size: 0.92rem; margin-bottom: 26px;
+    }
+    .kg-facts dt { font-weight: 700; color: var(--dark); }
+    .kg-facts dd { color: var(--text); }
+    .kg-info h3 {
+      font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .kg-personality {
+      font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 26px;
+    }
+    .kg-personality.pending { color: #7a6a8a; font-style: italic; }
+
+    .kg-week { margin-bottom: 18px; }
+    .kg-week-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--purple); margin-bottom: 8px;
+    }
+    .kg-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .kg-thumb {
+      padding: 0; border: 2px solid transparent; border-radius: 8px; overflow: hidden;
+      cursor: pointer; background: var(--lavender); aspect-ratio: 3/4;
+    }
+    .kg-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .kg-thumb.active { border-color: var(--gold); }
+    .kg-thumb:focus-visible { outline: 3px solid var(--purple); outline-offset: 2px; }
+    .kg-enquire { margin-top: 10px; font-size: 0.92rem; padding: 13px 28px; }
+
+    body.kg-locked { overflow: hidden; }
+
+    @media (max-width: 760px) {
+      .kg-modal { padding: 0; }
+      .kg-panel {
+        grid-template-columns: 1fr; max-height: 100vh; height: 100%;
+        border-radius: 0; overflow-y: auto; display: block;
+      }
+      .kg-viewer { height: 62vh; }
+      .kg-viewer img { max-height: 62vh; }
+      .kg-info { padding: 26px 22px 40px; overflow: visible; }
+      .kg-info h2 { font-size: 1.6rem; }
+      .kg-close { position: fixed; }
     }
   </style>
 </head>
@@ -524,21 +645,21 @@
 <section class="litter-section" id="litter-1">
   <div class="litter-inner">
 
-    <!-- Queen intro card -->
+    <!-- Queen intro card: Arno (DreamGiver Kaleidoscope Dreams), her 2nd litter -->
     <div class="litter-header fade-up">
       <div class="queen-photo">
-        <img src="queen_1.jpg" alt="DreamGiver Somali queen — mother of Litter 1" loading="lazy" />
+        <img src="arno-with-litter.jpg" alt="DreamGiver Kaleidoscope Dreams (Arno), Fawn Silver Abyssinian variant queen, with her four newborn Somali kittens" loading="lazy" />
       </div>
       <div class="litter-info">
-        <div class="litter-badge">🐾 Litter 1</div>
-        <div class="queen-name">Queen <em>Name</em></div>
-        <div class="queen-subtitle">DreamGiver Queen · Somali</div>
-        <p>A short description of this queen — her personality, coat colour, and what makes her special. Her kittens inherit her wonderful temperament and stunning looks.</p>
+        <div class="litter-badge">🐾 Litter 5</div>
+        <div class="queen-name">DreamGiver Kaleidoscope Dreams <em>(Arno)</em></div>
+        <div class="queen-subtitle">Abyssinian (v) · Fawn Silver · 2 years 11 months</div>
+        <p>Affectionate on her own terms, Arno is gentle, quiet and a wonderful, perfect mother. This is her second litter, sired by DreamGiver C-3PO.</p>
         <div class="litter-meta">
-          <div class="litter-meta-item"><strong>Born:</strong> Month Year</div>
-          <div class="litter-meta-item"><strong>Colour:</strong> Usual / Sorrel / etc.</div>
-          <div class="litter-meta-item"><strong>Litter size:</strong> X kittens</div>
-          <div class="litter-meta-item"><strong>Ready from:</strong> Month Year</div>
+          <div class="litter-meta-item"><strong>Father:</strong> DreamGiver C-3PO</div>
+          <div class="litter-meta-item"><strong>Litter size:</strong> 4 kittens</div>
+          <div class="litter-meta-item"><strong>Colours:</strong> 2 Fawn Silver girls · 2 Sorrel Silver boys</div>
+          <div class="litter-meta-item"><strong>Born:</strong> October 2026</div>
         </div>
       </div>
     </div>
@@ -561,42 +682,46 @@
       <div class="carousel-track-wrap">
         <div class="carousel-track" id="track-1">
 
-          <div class="kitten-card">
+          <!-- DreamGiver Unforgettable Dreams | Fawn Silver F | mother: DreamGiver Kaleidoscope Dreams (Arno) -->
+          <div class="kitten-card" data-kitten="unforgettable-dreams">
             <div class="kitten-card-image">
-              <img src="kitten_1.jpg" alt="Somali kitten from DreamGiver Litter 1, Johannesburg" loading="lazy" />
+              <img src="unforgettable-dreams_w1_1.jpg" alt="DreamGiver Unforgettable Dreams, Fawn Silver female Somali kitten available from DreamGiver Cattery Johannesburg" loading="lazy" />
               <span class="kitten-status status-available">Available</span>
               <div class="kitten-overlay"><div class="kitten-overlay-content">
-                <h3>Kitten Name</h3><div class="overlay-status available">● Available</div>
+                <h3>Unforgettable Dreams</h3><div class="overlay-status available">● Available</div>
               </div></div>
             </div>
           </div>
 
-          <div class="kitten-card">
+          <!-- DreamGiver Utopian Dreams | Sorrel Silver M | mother: DreamGiver Kaleidoscope Dreams (Arno) -->
+          <div class="kitten-card" data-kitten="utopian-dreams">
             <div class="kitten-card-image">
-              <img src="kitten_2.jpg" alt="Somali kitten from DreamGiver Litter 1, Johannesburg" loading="lazy" />
-              <span class="kitten-status status-reserved">Reserved</span>
-              <div class="kitten-overlay"><div class="kitten-overlay-content">
-                <h3>Kitten Name</h3><div class="overlay-status reserved">● Reserved</div>
-              </div></div>
-            </div>
-          </div>
-
-          <div class="kitten-card">
-            <div class="kitten-card-image">
-              <img src="kitten_3.jpg" alt="Somali kitten from DreamGiver Litter 1, Johannesburg" loading="lazy" />
+              <img src="utopian-dreams_w1_1.jpg" alt="DreamGiver Utopian Dreams, Sorrel Silver male Somali kitten available from DreamGiver Cattery Johannesburg" loading="lazy" />
               <span class="kitten-status status-available">Available</span>
               <div class="kitten-overlay"><div class="kitten-overlay-content">
-                <h3>Kitten Name</h3><div class="overlay-status available">● Available</div>
+                <h3>Utopian Dreams</h3><div class="overlay-status available">● Available</div>
               </div></div>
             </div>
           </div>
 
-          <div class="kitten-card">
+          <!-- DreamGiver Unspoken Dreams | Sorrel Silver M | mother: DreamGiver Kaleidoscope Dreams (Arno) -->
+          <div class="kitten-card" data-kitten="unspoken-dreams">
             <div class="kitten-card-image">
-              <img src="kitten_4.jpg" alt="Somali kitten from DreamGiver Litter 1, Johannesburg" loading="lazy" />
-              <span class="kitten-status status-rehomed">Rehomed</span>
+              <img src="unspoken-dreams_w1_1.jpg" alt="DreamGiver Unspoken Dreams, Sorrel Silver male Somali kitten available from DreamGiver Cattery Johannesburg" loading="lazy" />
+              <span class="kitten-status status-available">Available</span>
               <div class="kitten-overlay"><div class="kitten-overlay-content">
-                <h3>Kitten Name</h3><div class="overlay-status rehomed">● Rehomed</div>
+                <h3>Unspoken Dreams</h3><div class="overlay-status available">● Available</div>
+              </div></div>
+            </div>
+          </div>
+
+          <!-- DreamGiver Ultimate Dreams | Fawn Silver F | mother: DreamGiver Kaleidoscope Dreams (Arno) -->
+          <div class="kitten-card" data-kitten="ultimate-dreams">
+            <div class="kitten-card-image">
+              <img src="ultimate-dreams_w1_1.jpg" alt="DreamGiver Ultimate Dreams, Fawn Silver female Somali kitten available from DreamGiver Cattery Johannesburg" loading="lazy" />
+              <span class="kitten-status status-available">Available</span>
+              <div class="kitten-overlay"><div class="kitten-overlay-content">
+                <h3>Ultimate Dreams</h3><div class="overlay-status available">● Available</div>
               </div></div>
             </div>
           </div>
@@ -655,7 +780,7 @@
 
           <div class="kitten-card">
             <div class="kitten-card-image">
-              <img src="kitten_5.jpg" alt="Somali kitten from DreamGiver Litter 2, Johannesburg" loading="lazy" />
+              <img src="kitten_1.jpg" alt="Somali kitten from DreamGiver Litter 2, Johannesburg" loading="lazy" />
               <span class="kitten-status status-available">Available</span>
               <div class="kitten-overlay"><div class="kitten-overlay-content">
                 <h3>Kitten Name</h3><div class="overlay-status available">● Available</div>
@@ -665,20 +790,30 @@
 
           <div class="kitten-card">
             <div class="kitten-card-image">
-              <img src="kitten_6.jpg" alt="Somali kitten from DreamGiver Litter 2, Johannesburg" loading="lazy" />
-              <span class="kitten-status status-available">Available</span>
-              <div class="kitten-overlay"><div class="kitten-overlay-content">
-                <h3>Kitten Name</h3><div class="overlay-status available">● Available</div>
-              </div></div>
-            </div>
-          </div>
-
-          <div class="kitten-card">
-            <div class="kitten-card-image">
-              <img src="kitten_7.jpg" alt="Somali kitten from DreamGiver Litter 2, Johannesburg" loading="lazy" />
+              <img src="kitten_2.jpg" alt="Somali kitten from DreamGiver Litter 2, Johannesburg" loading="lazy" />
               <span class="kitten-status status-reserved">Reserved</span>
               <div class="kitten-overlay"><div class="kitten-overlay-content">
                 <h3>Kitten Name</h3><div class="overlay-status reserved">● Reserved</div>
+              </div></div>
+            </div>
+          </div>
+
+          <div class="kitten-card">
+            <div class="kitten-card-image">
+              <img src="kitten_3.jpg" alt="Somali kitten from DreamGiver Litter 2, Johannesburg" loading="lazy" />
+              <span class="kitten-status status-available">Available</span>
+              <div class="kitten-overlay"><div class="kitten-overlay-content">
+                <h3>Kitten Name</h3><div class="overlay-status available">● Available</div>
+              </div></div>
+            </div>
+          </div>
+
+          <div class="kitten-card">
+            <div class="kitten-card-image">
+              <img src="kitten_4.jpg" alt="Somali kitten from DreamGiver Litter 2, Johannesburg" loading="lazy" />
+              <span class="kitten-status status-rehomed">Rehomed</span>
+              <div class="kitten-overlay"><div class="kitten-overlay-content">
+                <h3>Kitten Name</h3><div class="overlay-status rehomed">● Rehomed</div>
               </div></div>
             </div>
           </div>
@@ -788,17 +923,18 @@
     <div class="breeding-group-title fade-up">Our Queens</div>
     <div class="breeding-grid fade-up">
 
+      <!-- Arno — DreamGiver Kaleidoscope Dreams -->
       <div class="cat-card">
         <div class="cat-card-img">
-          <img src="queen_1.jpg" alt="DreamGiver Somali queen, pedigree breeding cat Johannesburg" loading="lazy" />
+          <img src="arno.jpg" alt="DreamGiver Kaleidoscope Dreams (Arno), Fawn Silver Abyssinian variant queen at DreamGiver Cattery Johannesburg" loading="lazy" />
         </div>
         <div class="cat-card-body">
-          <div class="cat-card-name">Queen Name</div>
-          <div class="cat-card-role">DreamGiver Queen · Somali</div>
-          <p>Description of this queen — her colour, personality, and show/breeding history. What makes her special to the programme.</p>
+          <div class="cat-card-name">Arno</div>
+          <div class="cat-card-role">DreamGiver Kaleidoscope Dreams</div>
+          <p>Fawn Silver Abyssinian (v), 2 years 11 months. Affectionate on her own terms, gentle, quiet and a wonderful, perfect mother.</p>
           <div class="cat-tags">
-            <span class="cat-tag">Usual</span>
-            <span class="cat-tag gold">Show Quality</span>
+            <span class="cat-tag">Fawn Silver</span>
+            <span class="cat-tag gold">Active Queen</span>
           </div>
         </div>
       </div>
@@ -935,48 +1071,62 @@
     hamburger.setAttribute('aria-expanded', open);
   });
 
-  // ── Generic multi-carousel engine ──
+  // ── Generic multi-carousel engine (one card per click) ──
   function initCarousel(id) {
     const track = document.getElementById('track-' + id);
     const dotsContainer = document.getElementById('dots-' + id);
     const prevBtn = document.querySelector(`.btn-prev[data-carousel="${id}"]`);
     const nextBtn = document.querySelector(`.btn-next[data-carousel="${id}"]`);
+    if (!track || !prevBtn || !nextBtn) return;
+
     const cards = track.querySelectorAll('.kitten-card');
     let current = 0;
 
+    // Distance from one card to the next (card width + gap), measured from the page
+    function step() {
+      if (cards.length > 1) return cards[1].offsetLeft - cards[0].offsetLeft;
+      return cards.length ? cards[0].offsetWidth : 0;
+    }
+    // How many cards fit in the visible area right now
     function visibleCount() {
-      if (window.innerWidth <= 560) return 1;
-      if (window.innerWidth <= 900) return 2;
-      return 3;
+      const s = step();
+      if (!s || !cards.length) return 1;
+      const wrap = track.parentElement;
+      const cs = getComputedStyle(wrap);
+      const inner = wrap.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      const gap = s - cards[0].offsetWidth;
+      return Math.max(1, Math.round((inner + gap) / s));
     }
-    function totalSlides() { return Math.ceil(cards.length / visibleCount()); }
-    function getCardWidth() {
-      return (track.parentElement.offsetWidth - 20 * (visibleCount() - 1)) / visibleCount();
-    }
+    // Last position: the final card sits at the right edge, never past it
+    function maxIndex() { return Math.max(0, cards.length - visibleCount()); }
+
     function buildDots() {
+      if (!dotsContainer) return;
       dotsContainer.innerHTML = '';
-      for (let i = 0; i < totalSlides(); i++) {
+      for (let i = 0; i <= maxIndex(); i++) {
         const dot = document.createElement('button');
         dot.className = 'dot' + (i === current ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to kitten ' + (i + 1));
         dot.addEventListener('click', () => goTo(i));
         dotsContainer.appendChild(dot);
       }
     }
     function updateDots() {
+      if (!dotsContainer) return;
       dotsContainer.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
     }
+    // Moves one card at a time
     function goTo(index) {
-      const maxSlide = totalSlides() - 1;
-      current = Math.max(0, Math.min(index, maxSlide));
-      track.style.transform = `translateX(-${current * visibleCount() * (getCardWidth() + 20)}px)`;
+      current = Math.max(0, Math.min(index, maxIndex()));
+      track.style.transform = `translateX(-${current * step()}px)`;
       prevBtn.disabled = current === 0;
-      nextBtn.disabled = current >= maxSlide;
+      nextBtn.disabled = current >= maxIndex();
       updateDots();
     }
     prevBtn.addEventListener('click', () => goTo(current - 1));
     nextBtn.addEventListener('click', () => goTo(current + 1));
 
-    // Touch support
+    // Touch / swipe support
     let touchStartX = 0;
     track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', e => {
@@ -986,7 +1136,7 @@
 
     buildDots();
     goTo(0);
-    window.addEventListener('resize', () => { buildDots(); goTo(0); });
+    window.addEventListener('resize', () => { buildDots(); goTo(current); });
   }
 
   initCarousel(1);
@@ -1000,6 +1150,268 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.08 });
   fadeEls.forEach(el => observer.observe(el));
+</script>
+
+<!-- ─── KITTEN GROWTH GALLERY (pop-up) ─── -->
+<div class="kg-modal" id="kgModal" role="dialog" aria-modal="true" aria-labelledby="kgName">
+  <div class="kg-backdrop" data-kg-close></div>
+  <div class="kg-panel">
+    <button class="kg-close" data-kg-close aria-label="Close">&times;</button>
+    <div class="kg-viewer">
+      <img id="kgMainImg" src="" alt="" />
+      <button class="kg-nav kg-prev" id="kgPrev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="kg-nav kg-next" id="kgNext" aria-label="Next photo">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="kg-caption" id="kgCaption"></div>
+    </div>
+    <div class="kg-info">
+      <span class="kg-status" id="kgStatus"></span>
+      <h2 id="kgName"></h2>
+      <div class="kg-reg" id="kgReg"></div>
+      <dl class="kg-facts" id="kgFacts"></dl>
+      <h3>Personality</h3>
+      <p class="kg-personality" id="kgPersonality"></p>
+      <h3>Growing up</h3>
+      <div id="kgWeeks"></div>
+      <a class="btn-gold kg-enquire" id="kgEnquire" href="https://wa.me/27827791642" target="_blank" rel="noopener">Ask about this kitten</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   KITTEN PROFILES — this is the only part that changes week to week.
+   • key       = matches data-kitten="..." on the kitten's card
+   • status    = "Available", "Reserved" or "Rehomed"
+   • personality = leave "" until it shows; then write a few sentences
+   • weeks     = one entry per week, oldest first. Add the newest week
+                 at the bottom. The card always shows the newest photo.
+   Photo names: <kitten>_w<week>_<number>.jpg  e.g. utopian-dreams_w2_1.jpg
+═══════════════════════════════════════════════════════════════ */
+const KITTEN_PROFILES = {
+
+  'unforgettable-dreams': {
+    name: 'Unforgettable Dreams',
+    registeredName: 'DreamGiver Unforgettable Dreams',
+    colour: 'Fawn Silver Somali',
+    sex: 'Female',
+    status: 'Available',
+    mother: 'DreamGiver Kaleidoscope Dreams (Arno)',
+    litter: 'Arno\'s 2nd litter',
+    personality: '',
+    weeks: [
+      { week: 1, photos: ['unforgettable-dreams_w1_1.jpg', 'unforgettable-dreams_w1_2.jpg', 'unforgettable-dreams_w1_3.jpg'] },
+    ],
+  },
+
+  'utopian-dreams': {
+    name: 'Utopian Dreams',
+    registeredName: 'DreamGiver Utopian Dreams',
+    colour: 'Sorrel Silver Somali',
+    sex: 'Male',
+    status: 'Available',
+    mother: 'DreamGiver Kaleidoscope Dreams (Arno)',
+    litter: 'Arno\'s 2nd litter',
+    personality: '',
+    weeks: [
+      { week: 1, photos: ['utopian-dreams_w1_1.jpg', 'utopian-dreams_w1_2.jpg', 'utopian-dreams_w1_3.jpg'] },
+    ],
+  },
+
+  'unspoken-dreams': {
+    name: 'Unspoken Dreams',
+    registeredName: 'DreamGiver Unspoken Dreams',
+    colour: 'Sorrel Silver Somali',
+    sex: 'Male',
+    status: 'Available',
+    mother: 'DreamGiver Kaleidoscope Dreams (Arno)',
+    litter: 'Arno\'s 2nd litter',
+    personality: '',
+    weeks: [
+      { week: 1, photos: ['unspoken-dreams_w1_1.jpg', 'unspoken-dreams_w1_2.jpg', 'unspoken-dreams_w1_3.jpg'] },
+    ],
+  },
+
+  'ultimate-dreams': {
+    name: 'Ultimate Dreams',
+    registeredName: 'DreamGiver Ultimate Dreams',
+    colour: 'Fawn Silver Somali',
+    sex: 'Female',
+    status: 'Available',
+    mother: 'DreamGiver Kaleidoscope Dreams (Arno)',
+    litter: 'Arno\'s 2nd litter',
+    personality: '',
+    weeks: [
+      { week: 1, photos: ['ultimate-dreams_w1_1.jpg', 'ultimate-dreams_w1_2.jpg', 'ultimate-dreams_w1_3.jpg'] },
+    ],
+  },
+
+};
+/* ═══════════════ end of kitten profiles ═══════════════ */
+
+(function () {
+  const modal = document.getElementById('kgModal');
+  if (!modal) return;
+  const mainImg = document.getElementById('kgMainImg');
+  const prevBtn = document.getElementById('kgPrev');
+  const nextBtn = document.getElementById('kgNext');
+  const caption = document.getElementById('kgCaption');
+  const weeksEl = document.getElementById('kgWeeks');
+  let photos = [];      // newest week first: [{src, week, n, of}]
+  let index = 0;
+  let lastFocus = null;
+
+  const statusClass = s => 'status-' + String(s || '').toLowerCase();
+  const pronoun = sex => (String(sex).toLowerCase().startsWith('f') ? 'her' : 'his');
+  const latestWeek = p => p.weeks[p.weeks.length - 1];
+
+  // Cards: show newest photo, a "Week N" badge and a hint to tap
+  document.querySelectorAll('.kitten-card[data-kitten]').forEach(card => {
+    const p = KITTEN_PROFILES[card.dataset.kitten];
+    if (!p || !p.weeks.length) return;
+    const wk = latestWeek(p);
+    const img = card.querySelector('.kitten-card-image img');
+    if (img && wk.photos[0]) img.src = wk.photos[0];
+    const imgWrap = card.querySelector('.kitten-card-image');
+    if (imgWrap && !imgWrap.querySelector('.kitten-week')) {
+      const b = document.createElement('span');
+      b.className = 'kitten-week';
+      b.textContent = 'Week ' + wk.week;
+      imgWrap.appendChild(b);
+    }
+    const oc = card.querySelector('.kitten-overlay-content');
+    if (oc && !oc.querySelector('.kitten-overlay-hint')) {
+      const h = document.createElement('span');
+      h.className = 'kitten-overlay-hint';
+      h.textContent = 'See ' + pronoun(p.sex) + ' growth →';
+      oc.appendChild(h);
+    }
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', 'See ' + p.name + "'s photos and details");
+    card.addEventListener('click', () => open(card.dataset.kitten, card));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card.dataset.kitten, card); }
+    });
+  });
+
+  function show(i) {
+    if (!photos.length) return;
+    index = Math.max(0, Math.min(i, photos.length - 1));
+    const ph = photos[index];
+    mainImg.src = ph.src;
+    mainImg.alt = ph.alt;
+    caption.textContent = 'Week ' + ph.week + ' · photo ' + ph.n + ' of ' + ph.of;
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === photos.length - 1;
+    weeksEl.querySelectorAll('.kg-thumb').forEach((t, ti) => t.classList.toggle('active', ti === index));
+  }
+
+  function open(key, fromEl) {
+    const p = KITTEN_PROFILES[key];
+    if (!p) return;
+    lastFocus = fromEl || document.activeElement;
+
+    const st = document.getElementById('kgStatus');
+    st.textContent = p.status;
+    st.className = 'kg-status ' + statusClass(p.status);
+    document.getElementById('kgName').textContent = p.name;
+    document.getElementById('kgReg').textContent = p.registeredName;
+
+    const facts = [['Colour', p.colour], ['Sex', p.sex], ['Mother', p.mother], ['Litter', p.litter],
+                   ['Age', 'Week ' + latestWeek(p).week]];
+    const dl = document.getElementById('kgFacts');
+    dl.innerHTML = '';
+    facts.forEach(([k, v]) => {
+      if (!v) return;
+      const dt = document.createElement('dt'); dt.textContent = k;
+      const dd = document.createElement('dd'); dd.textContent = v;
+      dl.append(dt, dd);
+    });
+
+    const pers = document.getElementById('kgPersonality');
+    if (p.personality && p.personality.trim()) {
+      pers.textContent = p.personality;
+      pers.classList.remove('pending');
+    } else {
+      pers.textContent = (pronoun(p.sex) === 'her' ? 'Her' : 'His') +
+        ' personality is still unfolding. We’ll share it here as ' +
+        (pronoun(p.sex) === 'her' ? 'she grows' : 'he grows') + '.';
+      pers.classList.add('pending');
+    }
+
+    // Newest week first
+    photos = [];
+    weeksEl.innerHTML = '';
+    p.weeks.slice().reverse().forEach(wk => {
+      const group = document.createElement('div');
+      group.className = 'kg-week';
+      const label = document.createElement('div');
+      label.className = 'kg-week-label';
+      label.textContent = 'Week ' + wk.week;
+      const grid = document.createElement('div');
+      grid.className = 'kg-thumbs';
+      wk.photos.forEach((src, i) => {
+        const alt = p.registeredName + ', ' + p.colour + ' kitten at week ' + wk.week + ', DreamGiver Cattery';
+        const pi = photos.push({ src, week: wk.week, n: i + 1, of: wk.photos.length, alt }) - 1;
+        const btn = document.createElement('button');
+        btn.className = 'kg-thumb';
+        btn.type = 'button';
+        btn.setAttribute('aria-label', 'Week ' + wk.week + ', photo ' + (i + 1));
+        const im = document.createElement('img');
+        im.src = src; im.alt = ''; im.loading = 'lazy';
+        btn.appendChild(im);
+        btn.addEventListener('click', () => show(pi));
+        grid.appendChild(btn);
+      });
+      group.append(label, grid);
+      weeksEl.appendChild(group);
+    });
+
+    const enquire = document.getElementById('kgEnquire');
+    enquire.textContent = 'Ask about ' + p.name;
+    enquire.href = 'https://wa.me/27827791642?text=' +
+      encodeURIComponent('Hi DreamGiver! I’d love to know more about ' + p.registeredName + '.');
+
+    modal.classList.add('open');
+    document.body.classList.add('kg-locked');
+    show(0);
+    modal.querySelector('.kg-close').focus();
+  }
+
+  function close() {
+    modal.classList.remove('open');
+    document.body.classList.remove('kg-locked');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  modal.querySelectorAll('[data-kg-close]').forEach(el => el.addEventListener('click', close));
+  prevBtn.addEventListener('click', () => show(index - 1));
+  nextBtn.addEventListener('click', () => show(index + 1));
+  document.addEventListener('keydown', e => {
+    if (!modal.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(index - 1);
+    if (e.key === 'ArrowRight') show(index + 1);
+    if (e.key === 'Tab') {   // keep keyboard focus inside the pop-up
+      const f = modal.querySelectorAll('button:not([disabled]), a[href]');
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  // Swipe between photos on phones
+  let sx = 0;
+  mainImg.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  mainImg.addEventListener('touchend', e => {
+    const d = sx - e.changedTouches[0].clientX;
+    if (Math.abs(d) > 50) show(index + (d > 0 ? 1 : -1));
+  });
+})();
 </script>
 
 </body>

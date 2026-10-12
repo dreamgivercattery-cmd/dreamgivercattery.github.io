@@ -209,7 +209,7 @@
     .kittens-header .divider { margin: 0 auto 20px; }
     .kittens-header p { font-size: 0.95rem; line-height: 1.75; color: #6a5a72; }
     .carousel-outer { position: relative; overflow: hidden; }
-    .carousel-track-wrap { overflow: hidden; padding: 0 56px; }
+    .carousel-track-wrap { overflow: hidden; padding: 0 56px; clip-path: inset(0 56px); }
     .carousel-track {
       display: flex; gap: 20px;
       transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
@@ -513,7 +513,7 @@
       .about-photo { height: 320px; }
       /* Kittens */
       #kittens { padding: 72px 0; }
-      .carousel-track-wrap { padding: 0 48px; }
+      .carousel-track-wrap { padding: 0 48px; clip-path: inset(0 48px); }
       .kitten-card { flex: 0 0 calc(50% - 10px); }
       /* Why */
       .why-grid { grid-template-columns: 1fr 1fr; }
@@ -540,7 +540,7 @@
       .why-card:nth-child(1), .why-card:nth-child(2), .why-card:nth-child(3) {
         border-bottom: 1px solid rgba(110,45,168,0.15);
       }
-      .carousel-track-wrap { padding: 0 40px; }
+      .carousel-track-wrap { padding: 0 40px; clip-path: inset(0 40px); }
       .kitten-card { flex: 0 0 100%; }
       .t-carousel-wrap { padding: 0 32px; }
       .t-card { padding: 36px 24px; }
@@ -633,42 +633,46 @@
     <div class="carousel-track-wrap">
       <div class="carousel-track" id="carouselTrack">
 
+        <!-- DreamGiver Unforgettable Dreams | Arno's 2nd litter -->
         <div class="kitten-card">
           <div class="kitten-card-image">
-            <img src="kitten_1.jpg" alt="Somali kitten" />
+            <img src="unforgettable-dreams_w1_1.jpg" alt="DreamGiver Unforgettable Dreams, Fawn Silver female Somali kitten available from DreamGiver Cattery Johannesburg" />
             <span class="kitten-status status-available">Available</span>
             <div class="kitten-overlay"><div class="kitten-overlay-content">
-              <h3>Kitten Name</h3><div class="overlay-status available">● Available</div>
+              <h3>Unforgettable Dreams</h3><div class="overlay-status available">● Available</div>
             </div></div>
           </div>
         </div>
 
+        <!-- DreamGiver Utopian Dreams | Arno's 2nd litter -->
         <div class="kitten-card">
           <div class="kitten-card-image">
-            <img src="kitten_2.jpg" alt="Somali kitten" />
-            <span class="kitten-status status-reserved">Reserved</span>
-            <div class="kitten-overlay"><div class="kitten-overlay-content">
-              <h3>Kitten Name</h3><div class="overlay-status reserved">● Reserved</div>
-            </div></div>
-          </div>
-        </div>
-
-        <div class="kitten-card">
-          <div class="kitten-card-image">
-            <img src="kitten_3.jpg" alt="Somali kitten" />
+            <img src="utopian-dreams_w1_1.jpg" alt="DreamGiver Utopian Dreams, Sorrel Silver male Somali kitten available from DreamGiver Cattery Johannesburg" />
             <span class="kitten-status status-available">Available</span>
             <div class="kitten-overlay"><div class="kitten-overlay-content">
-              <h3>Kitten Name</h3><div class="overlay-status available">● Available</div>
+              <h3>Utopian Dreams</h3><div class="overlay-status available">● Available</div>
             </div></div>
           </div>
         </div>
 
+        <!-- DreamGiver Unspoken Dreams | Arno's 2nd litter -->
         <div class="kitten-card">
           <div class="kitten-card-image">
-            <img src="kitten_4.jpg" alt="Somali kitten" />
-            <span class="kitten-status status-rehomed">Rehomed</span>
+            <img src="unspoken-dreams_w1_1.jpg" alt="DreamGiver Unspoken Dreams, Sorrel Silver male Somali kitten available from DreamGiver Cattery Johannesburg" />
+            <span class="kitten-status status-available">Available</span>
             <div class="kitten-overlay"><div class="kitten-overlay-content">
-              <h3>Kitten Name</h3><div class="overlay-status rehomed">● Rehomed</div>
+              <h3>Unspoken Dreams</h3><div class="overlay-status available">● Available</div>
+            </div></div>
+          </div>
+        </div>
+
+        <!-- DreamGiver Ultimate Dreams | Arno's 2nd litter -->
+        <div class="kitten-card">
+          <div class="kitten-card-image">
+            <img src="ultimate-dreams_w1_1.jpg" alt="DreamGiver Ultimate Dreams, Fawn Silver female Somali kitten available from DreamGiver Cattery Johannesburg" />
+            <span class="kitten-status status-available">Available</span>
+            <div class="kitten-overlay"><div class="kitten-overlay-content">
+              <h3>Ultimate Dreams</h3><div class="overlay-status available">● Available</div>
             </div></div>
           </div>
         </div>
@@ -944,53 +948,72 @@
     setTimeout(() => { btn.textContent = 'Send Message'; btn.style.background = ''; btn.style.color = ''; }, 3000);
   }
 
-  // ── Kittens Carousel ──
-  const track = document.getElementById('carouselTrack');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const dotsContainer = document.getElementById('carouselDots');
-  const cards = track.querySelectorAll('.kitten-card');
-  let current = 0;
+  // ── Kittens Carousel (one card per click) ──
+  (function () {
+    const track = document.getElementById('carouselTrack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsContainer = document.getElementById('carouselDots');
+    if (!track || !prevBtn || !nextBtn) return;
+      const cards = track.querySelectorAll('.kitten-card');
+      let current = 0;
 
-  function visibleCount() {
-    if (window.innerWidth <= 560) return 1;
-    if (window.innerWidth <= 900) return 2;
-    return 3;
-  }
-  function totalSlides() { return Math.ceil(cards.length / visibleCount()); }
-  function buildDots() {
-    dotsContainer.innerHTML = '';
-    for (let i = 0; i < totalSlides(); i++) {
-      const dot = document.createElement('button');
-      dot.className = 'dot' + (i === current ? ' active' : '');
-      dot.addEventListener('click', () => goTo(i));
-      dotsContainer.appendChild(dot);
-    }
-  }
-  function updateDots() {
-    dotsContainer.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-  function getCardWidth() {
-    return (track.parentElement.offsetWidth - 20 * (visibleCount() - 1)) / visibleCount();
-  }
-  function goTo(index) {
-    const maxSlide = totalSlides() - 1;
-    current = Math.max(0, Math.min(index, maxSlide));
-    track.style.transform = `translateX(-${current * visibleCount() * (getCardWidth() + 20)}px)`;
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current >= maxSlide;
-    updateDots();
-  }
-  prevBtn.addEventListener('click', () => goTo(current - 1));
-  nextBtn.addEventListener('click', () => goTo(current + 1));
-  let touchStartX = 0;
-  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) diff > 0 ? goTo(current + 1) : goTo(current - 1);
-  });
-  buildDots(); goTo(0);
-  window.addEventListener('resize', () => { buildDots(); goTo(0); });
+      // Distance from one card to the next (card width + gap), measured from the page
+      function step() {
+        if (cards.length > 1) return cards[1].offsetLeft - cards[0].offsetLeft;
+        return cards.length ? cards[0].offsetWidth : 0;
+      }
+      // How many cards fit in the visible area right now
+      function visibleCount() {
+        const s = step();
+        if (!s || !cards.length) return 1;
+        const wrap = track.parentElement;
+        const cs = getComputedStyle(wrap);
+        const inner = wrap.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+        const gap = s - cards[0].offsetWidth;
+        return Math.max(1, Math.round((inner + gap) / s));
+      }
+      // Last position: the final card sits at the right edge, never past it
+      function maxIndex() { return Math.max(0, cards.length - visibleCount()); }
+
+      function buildDots() {
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i <= maxIndex(); i++) {
+          const dot = document.createElement('button');
+          dot.className = 'dot' + (i === current ? ' active' : '');
+          dot.setAttribute('aria-label', 'Go to kitten ' + (i + 1));
+          dot.addEventListener('click', () => goTo(i));
+          dotsContainer.appendChild(dot);
+        }
+      }
+      function updateDots() {
+        if (!dotsContainer) return;
+        dotsContainer.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+      // Moves one card at a time
+      function goTo(index) {
+        current = Math.max(0, Math.min(index, maxIndex()));
+        track.style.transform = `translateX(-${current * step()}px)`;
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current >= maxIndex();
+        updateDots();
+      }
+      prevBtn.addEventListener('click', () => goTo(current - 1));
+      nextBtn.addEventListener('click', () => goTo(current + 1));
+
+      // Touch / swipe support
+      let touchStartX = 0;
+      track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+      });
+
+      buildDots();
+      goTo(0);
+      window.addEventListener('resize', () => { buildDots(); goTo(current); });
+  })();
 
   // ── Testimonials Carousel ──
   const tTrack = document.getElementById('tCarouselTrack');
@@ -1023,4 +1046,13 @@
   tPrevBtn.addEventListener('click', () => tGoTo(tCurrent - 1));
   tNextBtn.addEventListener('click', () => tGoTo(tCurrent + 1));
   let tTouchStartX = 0;
-  tTrack.addEventListener('touchstart', e => { tTouchStartX = e.touches[0].clientX; }, { passiv
+  tTrack.addEventListener('touchstart', e => { tTouchStartX = e.touches[0].clientX; }, { passive: true });
+  tTrack.addEventListener('touchend', e => {
+    const diff = tTouchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) diff > 0 ? tGoTo(tCurrent + 1) : tGoTo(tCurrent - 1);
+  });
+  buildTDots(); tGoTo(0);
+</script>
+
+</body>
+</html>
