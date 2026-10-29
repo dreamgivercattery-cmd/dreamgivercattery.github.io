@@ -633,6 +633,7 @@
     }
     .sire-photo.no-photo { cursor: default; }
     @media (prefers-reduced-motion: reduce) { .sire-photo { transition: none; } }
+    .litter-info p + p { margin-top: 12px; }
   </style>
 </head>
 <body>
@@ -927,6 +928,72 @@
 
 
 <!-- ═══════════════════════════════════════════
+     LITTER 4 — W Litter (Phoenix)
+═══════════════════════════════════════════ -->
+<section class="litter-section" id="litter-4">
+  <div class="litter-inner">
+
+    <!-- Queen intro card: Phoenix (DreamGiver I Dreamed a Dream), her 1st litter -->
+    <div class="litter-header fade-up">
+      <div class="queen-photo">
+        <img src="phoenix.jpg" alt="DreamGiver I Dreamed a Dream (Phoenix), Ruddy Abyssinian variant queen" loading="lazy" />
+      </div>
+      <div class="litter-info">
+        <div class="litter-badge">🐾 The W Litter</div>
+        <div class="queen-name">DreamGiver I Dreamed a Dream <em>(Phoenix)</em></div>
+        <div class="queen-subtitle">Ruddy · Born October 2023</div>
+        <p>Phoenix is a talkative ruddy Abyssinian variant with a big personality packed into a petite frame. She comes from an impressive pedigree, with both her mother, Neverwinters Catsy Cline, and her father, Mavericks Bjarke, having been South African Cat of the Year finalists. Despite her distinguished lineage, Phoenix is happiest when she&rsquo;s either perched somewhere she shouldn&rsquo;t be, usually up a tree, or curled up for a cuddle with her favourite humans.</p>
+        <p>Sweet, affectionate, and wonderfully demanding, Phoenix always makes her presence known. One of her most endearing quirks is gently patting your face when she&rsquo;s hungry, as if she&rsquo;s politely reminding you that her breakfast is clearly overdue. Full of charm, conversation, and mischief, Phoenix brings joy and laughter wherever she goes. ❤️🐾</p>
+        <p>This is her first litter, sired by Teddy.</p>
+        <div class="litter-meta">
+          <div class="litter-meta-item sire-item">
+            <!-- Father's photo: save it as teddy.jpg in the website folder. Until then a paw placeholder shows. -->
+            <span class="sire-photo" tabindex="0" aria-label="Photo of Teddy, the father">
+              <img src="teddy.jpg" alt="Teddy, father of this litter" onerror="this.parentElement.classList.add('no-photo');this.parentElement.removeAttribute('tabindex');this.replaceWith(Object.assign(document.createElement('span'),{className:'sire-paw',textContent:'🐾'}));" />
+            </span>
+            <span><strong>Father:</strong> Teddy</span>
+          </div>
+          <div class="litter-meta-item"><strong>Litter size:</strong> 2 kittens</div>
+          <div class="litter-meta-item"><strong>Colours:</strong> 1 Ruddy boy · 1 Ruddy girl</div>
+          <div class="litter-meta-item"><strong>Born:</strong> 27 October 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kittens-sub-header fade-up">
+      <h3>The Kittens</h3>
+      <div class="availability-pills">
+        <span class="pill pill-available">● Available</span>
+        <span class="pill pill-reserved">● Reserved</span>
+        <span class="pill pill-rehomed">● Rehomed</span>
+      </div>
+    </div>
+
+    <div class="carousel-outer fade-up">
+      <button class="carousel-btn btn-prev" data-carousel="4" aria-label="Previous">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="track-4">
+
+          <!-- W Litter kittens go here (same card format as the U Litter) -->
+          <div class="kitten-card">
+            <div class="kitten-placeholder"><span>🐾</span>Kitten photos coming soon</div>
+          </div>
+
+        </div>
+      </div>
+      <button class="carousel-btn btn-next" data-carousel="4" aria-label="Next">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+    <div class="carousel-dots" id="dots-4"></div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
      QUEENS & STUDS
 ═══════════════════════════════════════════ -->
 <section class="breeding-section" id="breeding">
@@ -986,6 +1053,22 @@
           <p>Sorrel, born October 2023. Sweet-natured and endlessly affectionate, with a heart as warm as her fox-red coat. An exceptional mother who even adopted Phoenix&rsquo;s two newborns as her own.</p>
           <div class="cat-tags">
             <span class="cat-tag">Sorrel</span>
+            <span class="cat-tag gold">Active Queen</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phoenix — DreamGiver I Dreamed a Dream -->
+      <div class="cat-card">
+        <div class="cat-card-img">
+          <img src="phoenix.jpg" alt="DreamGiver I Dreamed a Dream (Phoenix), Ruddy Abyssinian variant queen at DreamGiver Cattery Johannesburg" loading="lazy" />
+        </div>
+        <div class="cat-card-body">
+          <div class="cat-card-name">Phoenix</div>
+          <div class="cat-card-role">DreamGiver I Dreamed a Dream</div>
+          <p>Ruddy Abyssinian variant, born October 2023. Talkative, petite and full of mischief, from a line of SA Cat of the Year finalists. Pats your face when breakfast is overdue.</p>
+          <div class="cat-tags">
+            <span class="cat-tag">Ruddy</span>
             <span class="cat-tag gold">Active Queen</span>
           </div>
         </div>
@@ -1165,6 +1248,7 @@
   initCarousel(1);
   initCarousel(2);
   initCarousel(3);
+  initCarousel(4);
 
   // Scroll fade-in
   document.body.classList.add('js-ready');
