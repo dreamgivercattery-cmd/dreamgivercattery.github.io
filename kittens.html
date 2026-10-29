@@ -776,20 +776,27 @@
 <section class="litter-section" id="litter-2">
   <div class="litter-inner">
 
+    <!-- Queen intro card: Fifi (Mavericks Fireball of DreamGiver), her 2nd litter -->
     <div class="litter-header fade-up">
       <div class="queen-photo">
-        <img src="queen_2.jpg" alt="DreamGiver Somali queen — mother of Litter 2" loading="lazy" />
+        <img src="fifi-with-litter.jpg" alt="Mavericks Fireball of DreamGiver (Fifi), Ruddy queen, with her newborn kittens" loading="lazy" />
       </div>
       <div class="litter-info">
-        <div class="litter-badge">🐾 Litter 2</div>
-        <div class="queen-name">Queen <em>Name</em></div>
-        <div class="queen-subtitle">DreamGiver Queen · Somali</div>
-        <p>A short description of this queen — her personality, coat colour, and what makes her special. Her kittens inherit her wonderful temperament and stunning looks.</p>
+        <div class="litter-badge">🐾 The Avatar Fire Nation Litter</div>
+        <div class="queen-name">Mavericks Fireball of DreamGiver <em>(Fifi)</em></div>
+        <div class="queen-subtitle">Ruddy · Born August 2024</div>
+        <p>A shy baby who demands love on her own terms, and will nibble you if you move away too soon. Fifi is a brilliant mamma and very protective of her babies. This is her second litter, sired by DreamGiver C-3PO.</p>
         <div class="litter-meta">
-          <div class="litter-meta-item"><strong>Born:</strong> Month Year</div>
-          <div class="litter-meta-item"><strong>Colour:</strong> Usual / Sorrel / etc.</div>
-          <div class="litter-meta-item"><strong>Litter size:</strong> X kittens</div>
-          <div class="litter-meta-item"><strong>Ready from:</strong> Month Year</div>
+          <div class="litter-meta-item sire-item">
+            <!-- Father's photo: save it as c3po.jpg in the website folder. Until then a paw placeholder shows. -->
+            <span class="sire-photo" tabindex="0" aria-label="Photo of DreamGiver C-3PO, the father">
+              <img src="c3po.jpg" alt="DreamGiver C-3PO, father of this litter" onerror="this.parentElement.classList.add('no-photo');this.parentElement.removeAttribute('tabindex');this.replaceWith(Object.assign(document.createElement('span'),{className:'sire-paw',textContent:'🐾'}));" />
+            </span>
+            <span><strong>Father:</strong> DreamGiver C-3PO</span>
+          </div>
+          <div class="litter-meta-item"><strong>Litter size:</strong> 3 kittens</div>
+          <div class="litter-meta-item"><strong>Colours:</strong> 2 Ruddy boys · 1 Ruddy girl</div>
+          <div class="litter-meta-item"><strong>Born:</strong> 20 October 2026</div>
         </div>
       </div>
     </div>
@@ -810,42 +817,35 @@
       <div class="carousel-track-wrap">
         <div class="carousel-track" id="track-2">
 
-          <div class="kitten-card">
+          <!-- DreamGiver Zuko | Ruddy M | mother: Mavericks Fireball of DreamGiver (Fifi) -->
+          <div class="kitten-card" data-kitten="zuko">
             <div class="kitten-card-image">
-              <img src="kitten_1.jpg" alt="Somali kitten from DreamGiver Litter 2, Johannesburg" loading="lazy" />
+              <img src="zuko_w1_1.jpg" alt="DreamGiver Zuko, Ruddy male Somali kitten available from DreamGiver Cattery Johannesburg" loading="lazy" />
               <span class="kitten-status status-available">Available</span>
               <div class="kitten-overlay"><div class="kitten-overlay-content">
-                <h3>Kitten Name</h3><div class="overlay-status available">● Available</div>
+                <h3>Zuko</h3><div class="overlay-status available">● Available</div>
               </div></div>
             </div>
           </div>
 
-          <div class="kitten-card">
+          <!-- DreamGiver Iroh | Ruddy M | mother: Mavericks Fireball of DreamGiver (Fifi) -->
+          <div class="kitten-card" data-kitten="iroh">
             <div class="kitten-card-image">
-              <img src="kitten_2.jpg" alt="Somali kitten from DreamGiver Litter 2, Johannesburg" loading="lazy" />
+              <img src="iroh_w1_1.jpg" alt="DreamGiver Iroh, Ruddy male Somali kitten reserved, DreamGiver Cattery Johannesburg" loading="lazy" />
               <span class="kitten-status status-reserved">Reserved</span>
               <div class="kitten-overlay"><div class="kitten-overlay-content">
-                <h3>Kitten Name</h3><div class="overlay-status reserved">● Reserved</div>
+                <h3>Iroh</h3><div class="overlay-status reserved">● Reserved</div>
               </div></div>
             </div>
           </div>
 
-          <div class="kitten-card">
+          <!-- DreamGiver Azula | Ruddy F | mother: Mavericks Fireball of DreamGiver (Fifi) -->
+          <div class="kitten-card" data-kitten="azula">
             <div class="kitten-card-image">
-              <img src="kitten_3.jpg" alt="Somali kitten from DreamGiver Litter 2, Johannesburg" loading="lazy" />
-              <span class="kitten-status status-available">Available</span>
+              <img src="azula_w1_1.jpg" alt="DreamGiver Azula, Ruddy female Somali kitten reserved, DreamGiver Cattery Johannesburg" loading="lazy" />
+              <span class="kitten-status status-reserved">Reserved</span>
               <div class="kitten-overlay"><div class="kitten-overlay-content">
-                <h3>Kitten Name</h3><div class="overlay-status available">● Available</div>
-              </div></div>
-            </div>
-          </div>
-
-          <div class="kitten-card">
-            <div class="kitten-card-image">
-              <img src="kitten_4.jpg" alt="Somali kitten from DreamGiver Litter 2, Johannesburg" loading="lazy" />
-              <span class="kitten-status status-rehomed">Rehomed</span>
-              <div class="kitten-overlay"><div class="kitten-overlay-content">
-                <h3>Kitten Name</h3><div class="overlay-status rehomed">● Rehomed</div>
+                <h3>Azula</h3><div class="overlay-status reserved">● Reserved</div>
               </div></div>
             </div>
           </div>
@@ -971,17 +971,18 @@
         </div>
       </div>
 
+      <!-- Fifi — Mavericks Fireball of DreamGiver -->
       <div class="cat-card">
         <div class="cat-card-img">
-          <img src="queen_2.jpg" alt="DreamGiver Somali queen, pedigree breeding cat Johannesburg" loading="lazy" />
+          <img src="fifi.jpg" alt="Mavericks Fireball of DreamGiver (Fifi), Ruddy queen at DreamGiver Cattery Johannesburg" loading="lazy" />
         </div>
         <div class="cat-card-body">
-          <div class="cat-card-name">Queen Name</div>
-          <div class="cat-card-role">DreamGiver Queen · Somali</div>
-          <p>Description of this queen — her colour, personality, and show/breeding history. What makes her special to the programme.</p>
+          <div class="cat-card-name">Fifi</div>
+          <div class="cat-card-role">Mavericks Fireball of DreamGiver</div>
+          <p>Ruddy, born August 2024. A shy baby who demands love on her own terms and will nibble you if you move away too soon. A brilliant, protective mamma.</p>
           <div class="cat-tags">
-            <span class="cat-tag">Sorrel</span>
-            <span class="cat-tag gold">Show Quality</span>
+            <span class="cat-tag">Ruddy</span>
+            <span class="cat-tag gold">Active Queen</span>
           </div>
         </div>
       </div>
@@ -1287,6 +1288,48 @@ const KITTEN_PROFILES = {
       { week: 1, photos: ['ultimate-dreams_w1_1.jpg', 'ultimate-dreams_w1_2.jpg', 'ultimate-dreams_w1_3.jpg'] },
       { week: 2, photos: ['ultimate-dreams_w2_1.jpg', 'ultimate-dreams_w2_2.jpg', 'ultimate-dreams_w2_3.jpg'] },
       { week: 3, photos: ['ultimate-dreams_w3_1.jpg', 'ultimate-dreams_w3_2.jpg', 'ultimate-dreams_w3_3.jpg'] },
+    ],
+  },
+
+  'zuko': {
+    name: 'Zuko',
+    registeredName: 'DreamGiver Zuko',
+    colour: 'Ruddy Somali',
+    sex: 'Male',
+    status: 'Available',
+    mother: 'Mavericks Fireball of DreamGiver (Fifi)',
+    litter: 'Avatar Fire Nation Litter',
+    personality: '',
+    weeks: [
+      { week: 1, photos: ['zuko_w1_1.jpg', 'zuko_w1_2.jpg', 'zuko_w1_3.jpg'] },
+    ],
+  },
+
+  'iroh': {
+    name: 'Iroh',
+    registeredName: 'DreamGiver Iroh',
+    colour: 'Ruddy Somali',
+    sex: 'Male',
+    status: 'Reserved',
+    mother: 'Mavericks Fireball of DreamGiver (Fifi)',
+    litter: 'Avatar Fire Nation Litter',
+    personality: '',
+    weeks: [
+      { week: 1, photos: ['iroh_w1_1.jpg', 'iroh_w1_2.jpg', 'iroh_w1_3.jpg'] },
+    ],
+  },
+
+  'azula': {
+    name: 'Azula',
+    registeredName: 'DreamGiver Azula',
+    colour: 'Ruddy Somali',
+    sex: 'Female',
+    status: 'Reserved',
+    mother: 'Mavericks Fireball of DreamGiver (Fifi)',
+    litter: 'Avatar Fire Nation Litter',
+    personality: '',
+    weeks: [
+      { week: 1, photos: ['azula_w1_1.jpg', 'azula_w1_2.jpg', 'azula_w1_3.jpg'] },
     ],
   },
 
