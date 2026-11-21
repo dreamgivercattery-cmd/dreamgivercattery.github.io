@@ -1037,6 +1037,73 @@
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     LITTER 5 — X Litter (Purrfect)
+═══════════════════════════════════════════ -->
+<section class="litter-section" id="litter-5">
+  <div class="litter-inner">
+
+    <!-- Queen intro card: Purrfect (DreamGiver's Purrfect Dreams), her 1st litter -->
+    <div class="litter-header fade-up">
+      <div class="queen-photo">
+        <img src="purrfect.jpg" alt="DreamGiver's Purrfect Dreams (Purrfect), Black Silver Somali queen with her newborn X Litter" loading="lazy" />
+      </div>
+      <div class="litter-info">
+        <div class="litter-badge">🐾 The X Litter</div>
+        <div class="queen-name">DreamGiver&rsquo;s Purrfect Dreams <em>(Purrfect)</em></div>
+        <div class="queen-subtitle">Black Silver · Born September 2024</div>
+        <p>DreamGiver&rsquo;s Purrfect Dreams is an exquisitely beautiful black silver Somali whose elegance and grace are matched only by her gentle nature. At just two years old, Dreams has already proven herself to be an exceptional queen, having recently welcomed her first litter. Soft, affectionate, and serene, she carries herself with a quiet confidence that captivates everyone who meets her.</p>
+        <p>A devoted mother, Purrfect Dreams cares for her kittens with unwavering patience and tenderness, never far from their side. Her striking beauty, loving temperament, and natural maternal instincts make her a wonderful ambassador for the Somali breed and a cherished member of the DreamGiver family. ❤️🐾</p>
+        <p>This is her first litter, sired by Zurak.</p>
+        <div class="litter-meta">
+          <div class="litter-meta-item sire-item">
+            <!-- Father's photo: save it as zurak.jpg in the website folder. Until then a paw placeholder shows. -->
+            <span class="sire-photo" tabindex="0" aria-label="Photo of Zurak, the father">
+              <img src="zurak.jpg" alt="Zurak, father of this litter" onerror="this.parentElement.classList.add('no-photo');this.parentElement.removeAttribute('tabindex');this.replaceWith(Object.assign(document.createElement('span'),{className:'sire-paw',textContent:'🐾'}));" />
+            </span>
+            <span><strong>Father:</strong> Zurak</span>
+          </div>
+          <div class="litter-meta-item"><strong>Litter size:</strong> 4 kittens</div>
+          <div class="litter-meta-item"><strong>Colours:</strong> 1 Fawn boy · 2 Sorrel Silver boys · 1 Sorrel girl</div>
+          <div class="litter-meta-item"><strong>Born:</strong> 7 November 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kittens-sub-header fade-up">
+      <h3>The Kittens</h3>
+      <div class="availability-pills">
+        <span class="pill pill-available">● Available</span>
+        <span class="pill pill-reserved">● Reserved</span>
+        <span class="pill pill-rehomed">● Rehomed</span>
+      </div>
+    </div>
+
+    <div class="carousel-outer fade-up">
+      <button class="carousel-btn btn-prev" data-carousel="5" aria-label="Previous">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="track-5">
+
+          <!-- Placeholder: remove this card when the first X Litter kitten is added -->
+          <div class="kitten-card">
+            <div class="kitten-card-image">
+              <div class="kitten-placeholder"><span>🐾</span>Photos coming soon</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <button class="carousel-btn btn-next" data-carousel="5" aria-label="Next">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+    <div class="carousel-dots" id="dots-5"></div>
+
+  </div>
+</section>
+
 
 <!-- ═══════════════════════════════════════════
      QUEENS & STUDS
@@ -1114,6 +1181,22 @@
           <p>Ruddy Abyssinian variant, born October 2023. Talkative, petite and full of mischief, from a line of SA Cat of the Year finalists. Pats your face when breakfast is overdue.</p>
           <div class="cat-tags">
             <span class="cat-tag">Ruddy</span>
+            <span class="cat-tag gold">Active Queen</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Purrfect — DreamGiver's Purrfect Dreams -->
+      <div class="cat-card">
+        <div class="cat-card-img">
+          <img src="purrfect.jpg" alt="DreamGiver's Purrfect Dreams (Purrfect), Black Silver Somali queen at DreamGiver Cattery Johannesburg" loading="lazy" />
+        </div>
+        <div class="cat-card-body">
+          <div class="cat-card-name">Purrfect</div>
+          <div class="cat-card-role">DreamGiver&rsquo;s Purrfect Dreams</div>
+          <p>Black Silver, born September 2024. Elegant, gentle and serene, with a quiet confidence. A devoted, patient mother to the X Litter.</p>
+          <div class="cat-tags">
+            <span class="cat-tag">Black Silver</span>
             <span class="cat-tag gold">Active Queen</span>
           </div>
         </div>
@@ -1294,6 +1377,7 @@
   initCarousel(2);
   initCarousel(3);
   initCarousel(4);
+  initCarousel(5);
 
   // Scroll fade-in
   document.body.classList.add('js-ready');
